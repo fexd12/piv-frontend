@@ -20,7 +20,7 @@
       </div> -->
 
       <!-- search form (Optional) -->
-      <form v-on:submit.prevent class="sidebar-form" id="searchForm">
+      <!-- <form v-on:submit.prevent class="sidebar-form" id="searchForm">
         <div class="input-group" id="searchContainer">
           <span class="input-group-btn">
             <input type="text"
@@ -35,7 +35,7 @@
             </button>
           </span>
         </div>
-      </form>
+      </form> -->
       <!-- /.search form -->
 
       <!-- Sidebar Menu -->
