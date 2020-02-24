@@ -3,7 +3,7 @@
   <section class="content">
     <!-- GitHub hint -->
     <div class="row">
-      <div class="col-xs-12">
+      <!-- <div class="col-xs-12">
         <alert :dismissible="true"
                type="success"
                :iconClasses="['fa', 'fa-check']"
@@ -13,7 +13,7 @@
             <i class="fa fa-github fa-2x"></i>
           </a>
         </alert>
-      </div>
+      </div> -->
 
       <!-- Info boxes -->
       <div class="col-md-3 col-sm-6 col-xs-12">
@@ -71,9 +71,9 @@
             </div>
           </div>
         </div>
-        <div class="text-center">
+        <!-- <div class="text-center">
           <small><b>Pro Tip</b> Don't forget to star us on github!</small>
-        </div>
+        </div> -->
       </div>
     </div>
     <!-- /.row -->
