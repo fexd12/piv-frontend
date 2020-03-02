@@ -8,7 +8,7 @@ class tag{
 
     }
     insertInto(tag){
-        `insert into ${this.config} values ${tag}`
+        let query = `insert into ${this.config} values ${tag}`
 
     }
 }
