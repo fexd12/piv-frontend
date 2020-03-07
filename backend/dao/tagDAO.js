@@ -1,14 +1,29 @@
 import {criaClient} from './banco'
 
 class tag{
-    config = {
-        //tabela e colunas
+    constructor() {
+        this.config = { 
+            table: '',
+            sequence: '',
+            fields: [
+              '',
+            ],
+            pk: ''
+          };
     }
-    readbyid(){
+
+    async readAll(){
+        let query = `SELECT ${this.config.fields.join(',')} FROM ${this.config.table}`;
+    }
+
+    async readbyid(id){
+        let query = `SELECT ${this.config.fields.join(',')} FROM ${this.config.table} WHERE ${this.config.pk} = ?`;
 
     }
-    insertInto(tag){
-        let query = `insert into ${this.config} values ${tag}`
+
+    async insertInto(tag){
+        // let query = `insert into ${this.config.table} (${this.config.fields.join(',')}) values (${this.config.fields.map(q=>'?').join(',')})`;
+        let query = `INSERT INTO ${this.config.table} (${this.config.fields.join(',')}) values ?`;
 
     }
 }
