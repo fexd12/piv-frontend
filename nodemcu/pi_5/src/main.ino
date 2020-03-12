@@ -96,7 +96,7 @@ void loop(){
 	Serial.println("Requesting URL  ");
 	//Serial.println(url);
 
-	client.print(String("GET ") + url + " HTTP/1.0\r\n" +
+	client.print(String("POST ") + url + " HTTP/1.0\r\n" +
 				 "Host: " + host + "\r\n" +
 				 "Connection: close\r\n\r\n");
 
