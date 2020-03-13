@@ -1,4 +1,4 @@
-import {criaClient} from './banco'
+import {criaClient} from './db'
 
 class users{
     

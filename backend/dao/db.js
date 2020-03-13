@@ -1,17 +1,15 @@
 import {Client} from 'pg'
 
-const options = {
-    host: '',
-    user: '',
-    password: '',
-    database: '',
-    port:''
-};
-
-function CriaClient(){
-    return new Client(options)
+function criaClient(){
+    return new Client({
+        user: 'postgres',
+        host: 'localhost',
+        database: 'pi_v',
+        password: '1234',
+        port:5432
+    });
 }
 
 export {
-    CriaClient
+    criaClient
 }

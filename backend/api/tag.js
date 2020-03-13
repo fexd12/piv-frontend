@@ -1,19 +1,32 @@
 import {Router} from 'express';
 
-import tagDAO from '../dao/tagDAO';
+import {tagDAO} from '../dao/tagDAO';
 
 const router = Router();
 
 router.post('/:tag',async (req,res)=>{
+   
     let tag = req.params.tag;
     let dao = new tagDAO();
+    try {
+        
+        dao.insertInto(tag);
+        
+        // dao.readbyid(tag).then((d)=>{
+        //     if(d === undefined){
+        //         dao.insertInto(tag);
+        //     }
+        //     else{
+        //         res.send('tag já cadastradas')
+        //     }
+        // })
+
+    } catch (error) {
+        res.send('error')
+    }
     
-    await dao.readbyid(tag).then(async (d)=>{
-        if(d === undefined){
-            await dao.insertInto(tag);
-        }
-    })
     res.status(200).send("text");
+   
 })
 
 router.get('/all',async (req,res)=>{
