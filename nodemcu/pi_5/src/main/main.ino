@@ -7,8 +7,8 @@
 #include <MFRC522.h>
 #include <string.h>
 
-#define RST_PIN 5 // pin rfid
-#define SS_PIN 15 // pin rfid
+#define RST_PIN 22 // pin rfid
+#define SS_PIN 21 // pin rfid
 
 const char *ssid = "Fe";
 const char *password = "123456789";
@@ -53,8 +53,6 @@ void setup(){
 
 void loop(){
 	//Connection to server
-	Serial.print("Connecting to: ");
-	Serial.println(host);
 
 	// Look for new cards
 	if (!mfrc522.PICC_IsNewCardPresent()){
@@ -90,18 +88,18 @@ void loop(){
 	Serial.println("Requesting URL  ");
 	//Serial.println(url);
 
-	client.print(String("POST ") + url + " HTTP/1.0\r\n" +
+	client.print(String("GET ") + url + " HTTP/1.0\r\n" +
 				 "Host: " + host + "\r\n" +
 				 "Connection: close\r\n\r\n");
 
-	delay(5000);
+	delay(3000);
 	while (client.available()){
 		String line = client.readStringUntil('\r');
 		Serial.print(line);
 	}
 	Serial.println();
 	Serial.println("Closing connection");
-	delay(5000);
+	delay(3000);
 }
 
 // Helper routine to dump a byte array as hex values to Serial

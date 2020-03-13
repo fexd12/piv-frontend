@@ -4,12 +4,12 @@ import {tagDAO} from '../dao/tagDAO';
 
 const router = Router();
 
-router.post('/:tag',async (req,res)=>{
-   
+router.get('/:tag',async (req,res)=>{
+    
     let tag = req.params.tag;
     let dao = new tagDAO();
     try {
-        
+        console.log(tag);
         dao.insertInto(tag);
         
         // dao.readbyid(tag).then((d)=>{
