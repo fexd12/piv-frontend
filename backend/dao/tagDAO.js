@@ -7,7 +7,6 @@ class tagDAO{
             sequence: 'taq_sequence',
             fields: [
               'id',
-              'id_users',
               'tag',
               'state',
               'created_at',
@@ -49,7 +48,7 @@ class tagDAO{
         
         const client = criaClient();
         await client.connect();
-        let _query = `INSERT INTO ${this.config.table} (id, id_users, tag) values (nextval('tag_sequence'),1,'${tag}')`;
+        let _query = `INSERT INTO ${this.config.table} (id, tag) values (nextval('tag_sequence'),'${tag}')`;
         console.log(_query);
         let resut = await client.query(_query);
         await client.end();

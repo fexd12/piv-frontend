@@ -1,32 +1,46 @@
 import {criaClient} from './db'
 
-class users{
+class usersDAO{
     
     constructor() {
         this.config = { 
-            table: '',
-            sequence: '',
+            table: 'users',
+            sequence: 'users_sequence',
             fields: [
-              '',
+              'id',
+              'name',
+              'created_at',
+              'update_at'
             ],
-            pk: ''
+            pk: 'id'
           };
     }
 
     async readAll(){
-        let query = `SELECT ${this.config.fields.join(',')} FROM ${this.config.table}`;
+        let client =  criaClient();
+        await client.connect();
+        let _query = `SELECT ${this.config.fields.join(',')} FROM ${this.config.table}`;
+        let result = await client.query(_query);
+        await client.end();
+        return result
     }
 
     async readbyid(id){
-        let query = `SELECT ${this.config.fields.join(',')} FROM ${this.config.table} WHERE ${this.config.pk} = ?`;
-
+        let client = criaClient();
+        await client.connect();
+        let _query = `SELECT ${this.config.fields.join(',')} FROM ${this.config.table} WHERE ${this.config.pk} = ${id}`;
+        let result = await client.query(_query);
+        await client.end();
+        return result
     }
 
     async insertInto(tag){
         // let query = `insert into ${this.config.table} (${this.config.fields.join(',')}) values (${this.config.fields.map(q=>'?').join(',')})`;
-        let query = `INSERT INTO ${this.config.table} (${this.config.fields.join(',')}) values ?`;
-
+        let client = criaClient();
+        await client.connect();
+        let _query = `INSERT INTO ${this.config.table} (${this.config.fields.join(',')}) values ?`;
+        await client.query
     }
 }
 
-module.exports = {users}
+export{usersDAO}

@@ -26,7 +26,7 @@ router.post('/',async (req,res)=>{
     // }catch(err){
     //     res.send(err);
     // }
-})
+});
 
 router.get('/all',async (req,res)=>{
     let dao = new tagDAO;
