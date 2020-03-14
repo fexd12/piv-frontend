@@ -9,21 +9,23 @@ router.post('/',async (req,res)=>{
     let tag = req.body.tag;
     let dao = new tagDAO();
     
-    dao.insertInto(tag);
-    
-    // dao.readbyid(tag).then((d)=>{
-    //     if(d === undefined){
-    //         dao.insertInto(tag);
-    //     }
-    //     else{
-    //         res.send('tag já cadastradas')
-    //     }
-    // })
+    await dao.insertInto(tag).then(()=>{
 
-   
-    
-    res.status(200).send("text");
-   
+    }).catch((a)=>{
+        console.log(a);
+    })
+    console.log(tag);
+    // try{
+    //     await dao.readbyid(tag).then(async(d)=>{
+    //         if(d === undefined){
+    //             await dao.insertInto(tag);
+    //         }
+    //         }).catch((a)=>{
+    //         })
+    //     res.send('tag cadastrada');
+    // }catch(err){
+    //     res.send(err);
+    // }
 })
 
 router.get('/all',async (req,res)=>{

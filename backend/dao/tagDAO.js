@@ -46,14 +46,15 @@ class tagDAO{
 
     async insertInto(tag){
         // let query = `insert into ${this.config.table} (${this.config.fields.join(',')}) values (${this.config.fields.map(q=>'?').join(',')})`;
+        
         const client = criaClient();
         await client.connect();
-
-        let _query = `INSERT INTO ${this.config.table} (id, id_users, tag) values (nextval('tag_sequence'),2,${tag})`;
-        await client.query(_query);
+        let _query = `INSERT INTO ${this.config.table} (id, id_users, tag) values (nextval('tag_sequence'),1,'${tag}')`;
+        console.log(_query);
+        let resut = await client.query(_query);
         await client.end();
+        
         return true
-
     }
 }
 
