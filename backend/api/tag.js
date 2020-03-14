@@ -4,26 +4,23 @@ import {tagDAO} from '../dao/tagDAO';
 
 const router = Router();
 
-router.get('/:tag',async (req,res)=>{
+router.post('/',async (req,res)=>{
     
-    let tag = req.params.tag;
+    let tag = req.body.tag;
     let dao = new tagDAO();
-    try {
-        console.log(tag);
-        dao.insertInto(tag);
-        
-        // dao.readbyid(tag).then((d)=>{
-        //     if(d === undefined){
-        //         dao.insertInto(tag);
-        //     }
-        //     else{
-        //         res.send('tag já cadastradas')
-        //     }
-        // })
+    
+    dao.insertInto(tag);
+    
+    // dao.readbyid(tag).then((d)=>{
+    //     if(d === undefined){
+    //         dao.insertInto(tag);
+    //     }
+    //     else{
+    //         res.send('tag já cadastradas')
+    //     }
+    // })
 
-    } catch (error) {
-        res.send('error')
-    }
+   
     
     res.status(200).send("text");
    

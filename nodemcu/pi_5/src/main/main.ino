@@ -1,3 +1,4 @@
+#include <HTTPClient.h>
 #include <Arduino.h>
 #include "parson.h"
 #include "AzureIotHub.h"
@@ -10,9 +11,10 @@
 #define RST_PIN 22 // pin rfid
 #define SS_PIN 21 // pin rfid
 
+String BASE_URL = "http://192.168.0.40:3000/";
+
 const char *ssid = "Fe";
-const char *password = "123456789";
-const char *host = "localhost";
+const char *password = "q1w2e3r4t5";
 
 MFRC522 mfrc522(SS_PIN, RST_PIN); // Create MFRC522 instance.
 								  /*
@@ -26,12 +28,15 @@ String c;
 String d;
 
 WiFiClient client;
+HTTPClient http;
+
 void dump_byte_array(byte *buffer, byte bufferSize);
 void setup(){
 	Serial.begin(115200); // Initialize serial communications with the PC
 
 	SPI.begin();		// Init SPI bus
 	mfrc522.PCD_Init(); // Init MFRC522 card
+  
 	//for wifi
 	Serial.print("Connecting to ");
 	Serial.println(ssid);
@@ -47,7 +52,7 @@ void setup(){
 	Serial.println(WiFi.localIP());
 	Serial.println("Getway: ");
 	Serial.println(WiFi.gatewayIP());
-
+  
 	Serial.println(F("RFID Read: "));
 }
 
@@ -82,30 +87,51 @@ void loop(){
 	b.toUpperCase();
 	c.toUpperCase();
 	d.toUpperCase();
-
+  String tag = String(a)+String(b)+String(c)+String(d);
 	//Data sending
-	String url = "/tag/" + String(a) + String(b) + String(c) + String(d);
-	Serial.println("Requesting URL  ");
-	//Serial.println(url);
-
-	client.print(String("GET ") + url + " HTTP/1.0\r\n" +
-				 "Host: " + host + "\r\n" +
-				 "Connection: close\r\n\r\n");
-
-	delay(3000);
-	while (client.available()){
-		String line = client.readStringUntil('\r');
-		Serial.print(line);
-	}
-	Serial.println();
-	Serial.println("Closing connection");
-	delay(3000);
+	httpRequest("tag",tag);
 }
 
+void httpRequest(String path, String tag)
+{
+  String payload = makeRequest(path,tag);
+
+  if (!payload) {
+    return;
+  }
+
+  Serial.println("##[RESULT]## ==> " + payload);
+
+}
+
+String makeRequest(String path,String tag)
+{
+  http.begin(BASE_URL + path);
+  http.addHeader("content-type", "application/x-www-form-urlencoded");
+
+  String body = "tag="+tag;
+
+  int httpCode = http.POST(body);
+
+  if (httpCode < 0) {
+    Serial.println("request error - " + httpCode);
+    return "error";
+
+  }
+
+  if (httpCode != HTTP_CODE_OK) {
+    return "";
+  }
+
+  String response =  http.getString();
+  http.end();
+
+  return response;
+}
 // Helper routine to dump a byte array as hex values to Serial
 void dump_byte_array(byte *buffer, byte bufferSize){
 	for (byte i = 0; i < bufferSize; i++){
-		Serial.print(buffer[i] < 0x10 ? " 0" : " ");
+		//Serial.print(buffer[i] < 0x10 ? " 0" : " ");
 		Serial.print(buffer[i], HEX);
 	}
 }
