@@ -120,3 +120,6 @@ CREATE SEQUENCE public.users_tag_sequence
 
 ALTER SEQUENCE public.users_tag_sequence
     OWNER TO postgres;
+
+ALTER TABLE public.users_tag
+    ADD COLUMN acesso integer;
