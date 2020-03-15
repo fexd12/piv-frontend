@@ -8,10 +8,11 @@ router.get('/all',async(req,res)=>{
     let dao = new usersDAO();
 
     await dao.readAll().then((result)=>{
-        console.log(result);
+        //console.log(result);
         res.status(200).send(JSON.stringify(result));
     }).catch((a)=>{
-        console.log(a);
+        //console.log(a);
+        res.send(a)
     })
     
 });

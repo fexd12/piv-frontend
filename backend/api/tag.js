@@ -12,9 +12,10 @@ router.post('/',async (req,res)=>{
     await dao.insertInto(tag).then(()=>{
 
     }).catch((a)=>{
-        console.log(a);
+        //console.log(a);
+        res.send(a)
     })
-    console.log(tag);
+    //console.log(tag);
     // try{
     //     await dao.readbyid(tag).then(async(d)=>{
     //         if(d === undefined){
