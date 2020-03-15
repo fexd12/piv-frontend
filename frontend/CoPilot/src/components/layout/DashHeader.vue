@@ -24,25 +24,25 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import MessagesMenu from './MessagesMenu'
-import NotificationsMenu from './NotificationsMenu'
-import TasksMenu from './TasksMenu'
-import UserMenu from './UserMenu'
+// import { mapState } from 'vuex'
+// import MessagesMenu from './MessagesMenu'
+// import NotificationsMenu from './NotificationsMenu'
+// import TasksMenu from './TasksMenu'
+// import UserMenu from './UserMenu'
 
 export default {
   name: 'DashHeader',
-  components: {
-    MessagesMenu,
-    NotificationsMenu,
-    TasksMenu,
-    UserMenu
-  },
-  props: ['user'],
-  computed: {
-    ...mapState([
-      'userInfo'
-    ])
-  }
+  // components: {
+  //   MessagesMenu,
+  //   NotificationsMenu,
+  //   TasksMenu,
+  //   UserMenu
+  // },
+  props: ['user']
+  // computed: {
+  //   ...mapState([
+  //     'userInfo'
+  //   ])
+  // }
 }
 </script>

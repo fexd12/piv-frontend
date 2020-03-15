@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import faker from 'faker'
 import config from '../config'
 import DashFooter from './layout/DashFooter'
 import DashHeader from './layout/DashHeader'
@@ -60,9 +59,9 @@ export default {
   computed: {
     user () {
       return {
-        displayName: faker.name.findName(),
-        avatar: faker.image.avatar(),
-        roles: [faker.name.jobTitle(), faker.name.jobTitle()]
+        displayName: '',
+        avatar: '',
+        roles: ''
       }
     }
   }

@@ -17,36 +17,57 @@
 
       <!-- Info boxes -->
       <div class="col-md-3 col-sm-6 col-xs-12">
-        <info-box color-class="bg-aqua"
-                  :icon-classes="['ion', 'ion-ios-gear-outline']"
-                  text="CPU Traffic"
-                  number="90%"></info-box>
+        <template>
+          <div class="info-box">
+            <span :class="['info-box-icon', 'bg-yellow']">
+              <i :class="['ion', 'ion-ios-people-outline']"></i>
+            </span>
+            <div class="info-box-content">
+              <span :class="'info-box-text'">{{'Usuarios Cadastrados'}}</span>
+              <span :class="'info-box-number'">{{usuarios.soma}}</span>
+            </div>
+          </div>
+        </template>
+      </div>
+
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <template>
+          <div class="info-box">
+            <span :class="['info-box-icon', 'bg-yellow']">
+              <i :class="['ion', 'ion-ios-people-outline']"></i>
+            </span>
+            <div class="info-box-content">
+              <span :class="'info-box-text'">{{'Tags cadastradas'}}</span>
+              <span :class="'info-box-number'">{{tags.soma}}</span>
+            </div>
+          </div>
+        </template>
       </div>
       <!-- /.col -->
-      <div class="col-md-3 col-sm-6 col-xs-12">
+      <!-- <div class="col-md-3 col-sm-6 col-xs-12">
         <info-box color-class="bg-red"
                   :icon-classes="['fa', 'fa-google-plus']"
                   text="Likes"
                   number="41,410"></info-box>
-      </div>
+      </div> -->
       <!-- /.col -->
 
       <!-- fix for small devices only -->
       <div class="clearfix visible-sm-block"></div>
       
-      <div class="col-md-3 col-sm-6 col-xs-12">
+      <!-- <div class="col-md-3 col-sm-6 col-xs-12">
         <info-box color-class="bg-green"
                   :icon-classes="['ion', 'ion-ios-cart-outline']"
                   text="Sales"
                   number="760"></info-box>
-      </div>
+      </div> -->
       <!-- /.col -->
-      <div class="col-md-3 col-sm-6 col-xs-12">
+      <!-- <div class="col-md-3 col-sm-6 col-xs-12">
         <info-box color-class="bg-yellow"
                   :icon-classes="['ion', 'ion-ios-people-outline']"
                   text="New Members"
                   number="2,000"></info-box>
-      </div>
+      </div> -->
       <!-- /.col -->
     </div>
     <!-- /.row -->
@@ -79,7 +100,7 @@
     <!-- /.row -->
 
     <!-- Main row -->
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-md-3 col-sm-6 col-xs-12">
         <process-info-box color-class="bg-yellow"
                           :icon-classes="['ion', 'ion-ios-pricetag-outline']"
@@ -87,36 +108,36 @@
                           number="5,200"
                           :progress="50"
                           description="50% increase since May"></process-info-box>
-      </div>
+      </div> -->
       <!-- /.col -->
-      <div class="col-md-3 col-sm-6 col-xs-12">
+      <!-- <div class="col-md-3 col-sm-6 col-xs-12">
         <process-info-box color-class="bg-green"
                           :icon-classes="['ion', 'ion-ios-heart-outline']"
                           text="Mentions"
                           number="92,050"
                           :progress="20"
                           description="20% increase in 30 days"></process-info-box>
-      </div>
+      </div> -->
       <!-- /.col -->
-      <div class="col-md-3 col-sm-6 col-xs-12">
+      <!-- <div class="col-md-3 col-sm-6 col-xs-12">
         <process-info-box color-class="bg-red"
                           :icon-classes="['ion', 'ion-ios-cloud-download-outline']"
                           text="Downloads"
                           number="114,381"
                           :progress="70"
                           description="70% increase since yesterday"></process-info-box>
-      </div>
+      </div> -->
       <!-- /.col -->
-      <div class="col-md-3 col-sm-6 col-xs-12">
+      <!-- <div class="col-md-3 col-sm-6 col-xs-12">
         <process-info-box color-class="bg-aqua"
                           :icon-classes="['ion', 'ion-ios-chatbubble-outline']"
                           text="Direct Messages"
                           number="163,921"
                           :progress="40"
                           description="40% increase compared to last year"></process-info-box>
-      </div>
+      </div> -->
       <!-- /.col -->
-    </div>
+    <!-- </div> -->
     <!-- /.row -->
   </section>
   <!-- /.content -->
@@ -127,6 +148,7 @@ import Chart from 'chart.js'
 import Alert from '../widgets/Alert'
 import InfoBox from '../widgets/InfoBox'
 import ProcessInfoBox from '../widgets/ProcessInfoBox'
+import axios from 'axios'
 
 export default {
   name: 'Dashboard',
@@ -135,7 +157,7 @@ export default {
     InfoBox,
     ProcessInfoBox
   },
-  data () {
+  data: () => {
     return {
       generateRandomNumbers (numbers, max, min) {
         var a = []
@@ -143,22 +165,25 @@ export default {
           a.push(Math.floor(Math.random() * (max - min + 1)) + max)
         }
         return a
+      },
+      usuarios: {
+        soma: ''
+      },
+      tags: {
+        soma: ''
       }
     }
   },
-  computed: {
-    coPilotNumbers () {
-      return this.generateRandomNumbers(12, 1000000, 10000)
+  methods: {
+    async carregaUsuarios () {
+      let dados = await axios.get('http://localhost:3000/users/all')
+      this.usuarios.soma = dados.data
     },
-    personalNumbers () {
-      return this.generateRandomNumbers(12, 1000000, 10000)
+    async carregaTags () {
+      let dados = await axios.get('http://localhost:3000/tag/all')
+      this.tags.soma = dados.data
     },
-    isMobile () {
-      return (window.innerWidth <= 800 && window.innerHeight <= 600)
-    }
-  },
-  mounted () {
-    this.$nextTick(() => {
+    carregaGrafico () {
       var ctx = document.getElementById('trafficBar').getContext('2d')
       var config = {
         type: 'line',
@@ -219,7 +244,23 @@ export default {
       }
 
       new Chart(pieChartCanvas, pieConfig) // eslint-disable-line no-new
-    })
+    }
+  },
+  computed: {
+    coPilotNumbers () {
+      return this.generateRandomNumbers(12, 1000000, 10000)
+    },
+    personalNumbers () {
+      return this.generateRandomNumbers(12, 1000000, 10000)
+    },
+    isMobile () {
+      return (window.innerWidth <= 800 && window.innerHeight <= 600)
+    }
+  },
+  async mounted () {
+    await this.carregaUsuarios()
+    await this.carregaTags()
+    this.carregaGrafico()
   }
 }
 </script>
