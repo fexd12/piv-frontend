@@ -22,7 +22,7 @@ class usersDAO{
         let _query = `SELECT ${this.config.fields.join(',')} FROM ${this.config.table}`;
         let result = await client.query(_query);
         await client.end();
-        return result
+        return result.rowCount
     }
 
     async readbyid(id){

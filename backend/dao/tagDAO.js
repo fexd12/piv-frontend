@@ -24,7 +24,7 @@ class tagDAO{
 
         await client.end();
 
-        return result
+        return result.rowCount
     }
 
     async readbyid(id){

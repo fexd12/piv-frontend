@@ -28,13 +28,17 @@ router.post('/',async (req,res)=>{
     // }
 });
 
-router.get('/all',async (req,res)=>{
-    let dao = new tagDAO;
+router.get('/all',async(req,res)=>{
+    let dao = new tagDAO();
 
-    let result = await dao.readAll();
-
-    res.status(200).send(JSON.stringify(result));
-
+    await dao.readAll().then((result)=>{
+        //console.log(result);
+        res.status(200).send(JSON.stringify(result));
+    }).catch((a)=>{
+        //console.log(a);
+        res.send(a)
+    })
+    
 });
 
 router.get('/', function (req, res) {
