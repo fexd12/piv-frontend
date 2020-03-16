@@ -6,9 +6,9 @@
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
-      <a href="javascript:;" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+      <!-- <a href="javascript:;" class="sidebar-toggle centere" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
-      </a>
+      </a> -->
 
       <!-- Navbar Right Menu -->
       <!-- <div class="navbar-custom-menu">

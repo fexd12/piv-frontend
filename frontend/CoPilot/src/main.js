@@ -8,9 +8,11 @@ import VueRouter from 'vue-router'
 import { sync } from 'vuex-router-sync'
 import routes from './routes'
 import store from './store'
-
+import BootstrapVue from 'bootstrap-vue'
 // Import Helpers for filters
 import { domain, count, prettyDate, pluralize } from './filters'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 // Import Views - Top level
 import AppView from './components/App.vue'
@@ -22,6 +24,7 @@ Vue.filter('prettyDate', prettyDate)
 Vue.filter('pluralize', pluralize)
 
 Vue.use(VueRouter)
+Vue.use(BootstrapVue)
 
 // Routing logic
 var router = new VueRouter({
