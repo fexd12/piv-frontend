@@ -17,7 +17,13 @@ router.get('/all',async(req,res)=>{
     
 });
 
-router.post('/',async(req,res)=>{
+router.get('/userstag',async(req,res)=>{
+    let dao = new usersDAO();
+    await dao.readUsersTags().then((result)=>{
+        res.status(200).send(JSON.stringify(result))
+    }).catch((a)=>{
+        res.send(a)
+    })
 
 });
 

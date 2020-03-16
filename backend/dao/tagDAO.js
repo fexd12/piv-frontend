@@ -35,8 +35,8 @@ class tagDAO{
         let result = await client.query(_query);
         await client.end();
 
-        if(result > 0){
-            return result
+        if(result.rowCount > 0){
+            return result.rows[0]
         }else{
             return undefined
         }
