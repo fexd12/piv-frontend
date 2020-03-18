@@ -1,5 +1,6 @@
+/* eslint-disable */
 <template>
-  <div class="info-box">
+  <!-- <div class="info-box">
     <span :class="['info-box-icon', colorClass]">
       <i :class="iconClasses"></i>
     </span>
@@ -7,7 +8,8 @@
       <span class="info-box-text">{{text}}</span>
       <span class="info-box-number">{{number}}</span>
     </div>
-  </div>
+  </div> -->
+  <div></div>
 </template>
 
 <script>
@@ -22,10 +24,10 @@ export default {
       type: String,
       default: ''
     },
-    iconClasses: {
-      type: Array,
-      default: []
-    },
+    // iconClasses: {
+    //   type: Array,
+    //   default: []
+    // },
     colorClass: {
       type: String,
       default: 'bg-default'

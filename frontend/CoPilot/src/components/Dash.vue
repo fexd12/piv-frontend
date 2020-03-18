@@ -34,11 +34,9 @@
 </template>
 
 <script>
-import config from '../config'
 import DashFooter from './layout/DashFooter'
 import DashHeader from './layout/DashHeader'
 import Sidebar from './layout/Sidebar'
-import 'hideseek'
 
 export default {
   name: 'Dash',
@@ -51,8 +49,8 @@ export default {
     return {
       // section: 'Dash',
       classes: {
-        fixed_layout: config.fixedLayout,
-        hide_logo: config.hideLogoOnMobile
+        fixed_layout: '',
+        hide_logo: ''
       }
     }
   },

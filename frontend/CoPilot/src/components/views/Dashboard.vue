@@ -1,5 +1,4 @@
 <template>
-  <!-- Main content -->
   <section class="content">
     <!-- GitHub hint -->
     <div class="row">
@@ -16,7 +15,7 @@
       </div> -->
 
       <!-- Info boxes -->
-      <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="col-lg-3 col-md-6 col-12">
         <template>
           <div class="info-box">
             <span :class="['info-box-icon', 'bg-yellow']">
@@ -30,7 +29,7 @@
         </template>
       </div>
 
-      <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="col-lg-3 col-md-6 col-12">
         <template>
           <div class="info-box">
             <span :class="['info-box-icon', 'bg-yellow']">
@@ -69,34 +68,29 @@
                   number="2,000"></info-box>
       </div> -->
       <!-- /.col -->
-    </div>
+
     <!-- /.row -->
 
-    <div class="col-xs-12">
-      <div class="box">
+    <div class="col-12">
+    <div class="box">
         <div class="box-header with-border">
-          <h3 class="box-title"></h3>
-          <div class="box-body">
-            <div class="col-sm-6 col-xs-12">
-              <p class="text-center">
-                <strong>Web Traffic Overview</strong>
-              </p>
-              <canvas id="trafficBar" ></canvas>
+             <h3 class="box-title"></h3>
+            <div class="box-body">
+                <div class="col-lg-6 col-12">
+                    <p class="text-center"> <strong>Web Traffic Overview</strong>
+                    </p>
+                    <canvas id="trafficBar"></canvas>
+                </div>
+                <hr class="d-block d-sm-none-block">
+                <div class="col-lg-6 col-12">
+                    <p class="text-center"> <strong>Language Overview</strong>
+                    </p>
+                    <canvas id="languagePie"></canvas>
+                </div>
             </div>
-            <hr class="visible-xs-block">
-            <div class="col-sm-6 col-xs-12">
-              <p class="text-center">
-                <strong>Language Overview</strong>
-              </p>
-              <canvas id="languagePie"></canvas>
-            </div>
-          </div>
         </div>
-        <!-- <div class="text-center">
-          <small><b>Pro Tip</b> Don't forget to star us on github!</small>
-        </div> -->
-      </div>
     </div>
+</div>
     <!-- /.row -->
 
     <!-- Main row -->
@@ -139,6 +133,7 @@
       <!-- /.col -->
     <!-- </div> -->
     <!-- /.row -->
+    </div>
   </section>
   <!-- /.content -->
 </template>

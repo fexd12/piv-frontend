@@ -2,7 +2,7 @@
   <div class="tables">
     <label class="info-box-text">asdasdsad</label>
 
-    <b-button v-b-modal.criaUserTag>
+    <b-button class="btn btn-primary" v-b-modal.criaUserTag>
       <span>Adicionar</span>
     </b-button>
 
@@ -12,16 +12,15 @@
       ok-title="Salvar"
       cancel-title="Cancelar"
       @show="beforeUsersTags"
-      @ok="saveUsersTags">
-      <UsersTags v-model="ativoAtual" />
+      @ok="saveUsersTags"
+      >
+        <UsersTags v-model="ativoAtual" />
     </b-modal>
-    
 
     <div class="info-box-text">
       <b-table class="table table-bordered dataTable" hover fixed head-variant="light" :items="ativos" :fields="fields"></b-table>
     </div>
 
-    
   </div>
 </template>
 
@@ -95,6 +94,9 @@ export default {
 @import url('/static/js/plugins/datatables/jquery.dataTables.min.css');
 */
 
+
+
+/* 
 @import url('/static/js/plugins/datatables/dataTables.bootstrap.css');
 
 table.dataTable thead .sorting:after,
@@ -113,5 +115,5 @@ table.dataTable thead .sorting_asc:after {
 
 table.dataTable thead .sorting_desc:after {
   content: '\f0de';
-}
+} */
 </style>

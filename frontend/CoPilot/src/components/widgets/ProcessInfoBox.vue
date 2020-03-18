@@ -1,5 +1,6 @@
+/* eslint-disable */
 <template>
-  <div :class="['info-box', colorClass]">
+  <!-- <div :class="['info-box', colorClass]">
     <span class="info-box-icon">
       <i :class="iconClasses"></i>
     </span>
@@ -11,7 +12,8 @@
       </div>
       <span class="progress-description">{{description}}</span>
     </div>
-  </div>
+  </div> -->
+  <div/>
 </template>
 
 <script>
@@ -37,10 +39,10 @@ export default {
       type: String,
       default: ''
     },
-    iconClasses: {
-      type: Array,
-      default: []
-    },
+    // iconClasses: {
+    //   type: Array,
+    //   default: []
+    // },
     colorClass: {
       type: String,
       default: 'bg-default'
