@@ -27,6 +27,17 @@ class tagDAO{
         return result.rowCount
     }
 
+    async read(){
+        let _query = `SELECT ${this.config.fields.join(',')} FROM ${this.config.table}`;
+        const client = criaClient();
+        await client.connect();
+        let result = await client.query(_query);
+
+        await client.end();
+
+        return result.rows
+    }
+
     async readbyid(id){
         const client = criaClient();
 
@@ -48,7 +59,7 @@ class tagDAO{
         
         const client = criaClient();
         await client.connect();
-        let _query = `INSERT INTO ${this.config.table} (id, tag) values (nextval('tag_sequence'),'${tag}')`;
+        let _query = `INSERT INTO ${this.config.table} (tag) values ('${tag}')`;
         console.log(_query);
         let resut = await client.query(_query);
         await client.end();

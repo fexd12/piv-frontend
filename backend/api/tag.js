@@ -42,8 +42,17 @@ router.get('/all',async(req,res)=>{
     
 });
 
-router.get('/', function (req, res) {
-    res.send('Hello World!')
+router.get('/', async (req, res) => {
+    let dao = new tagDAO();
+
+    await dao.read().then((result)=>{
+        //console.log(result);
+        res.status(200).send(JSON.stringify(result));
+    }).catch((a)=>{
+        //console.log(a);
+        res.send(a)
+    })
+    
 });
 
 

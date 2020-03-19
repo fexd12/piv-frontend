@@ -25,6 +25,15 @@ class usersDAO{
         return result.rowCount
     }
 
+    async read(){
+        let client =  criaClient();
+        await client.connect();
+        let _query = `SELECT ${this.config.fields.join(',')} FROM ${this.config.table}`;
+        let result = await client.query(_query);
+        await client.end();
+        return result.rows
+    }
+
     async readUsersTags(){
         let client  = criaClient();
         await client.connect();
