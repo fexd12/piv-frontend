@@ -75,22 +75,22 @@
     <div class="box">
         <div class="box-header with-border">
              <h3 class="box-title"></h3>
-            <div class="box-body">
+              <div class="box-body">
                 <div class="col-lg-6 col-12">
                     <p class="text-center"> <strong>Web Traffic Overview</strong>
                     </p>
                     <canvas id="trafficBar"></canvas>
                 </div>
-                <hr class="d-block d-sm-none-block">
+                <!-- <hr class="d-block d-sm-none-block"> -->
                 <div class="col-lg-6 col-12">
-                    <p class="text-center"> <strong>Language Overview</strong>
-                    </p>
-                    <canvas id="languagePie"></canvas>
+                  <p class="text-center"> <strong>Language Overview</strong>
+                  </p>
+                  <canvas id="languagePie"></canvas>
                 </div>
-            </div>
+              </div>
+          </div>
         </div>
-    </div>
-</div>
+      </div>
     <!-- /.row -->
 
     <!-- Main row -->

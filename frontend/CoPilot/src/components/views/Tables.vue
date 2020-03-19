@@ -60,7 +60,7 @@ export default {
   methods: {
     async carregaTabela () {
       this.ativos.splice(0, this.ativos.length)
-      let dados = await axios.get('http://localhost:3000/users/userstag')
+      let dados = await axios.get('http://localhost:3000/userstag')
       this.ativos.push(...dados.data)
     },
     beforeUsersTags() {
@@ -69,11 +69,17 @@ export default {
       this.ativoAtual.acesso = ''
     },
     async saveUsersTags() {
-      // let payload = {
-      //   name: this.ativoAtual.name,
-      //   tag: this.ativoAtual.tag,
-      //   acesso: this.ativoAtual.acesso
-      // }
+      let payload = {
+        name: this.ativoAtual.name,
+        tag: this.ativoAtual.tag,
+        acesso: this.ativoAtual.acesso
+      }
+      try {
+        await axios.post("http://localhost:3000/userstag/", payload);
+        await this.carregaTabela();
+      } catch (err) {
+        alert("erro ao inserir ativo");
+      }
     }
 
   },
