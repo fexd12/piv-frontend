@@ -78,7 +78,7 @@ export default {
         await axios.post("http://localhost:3000/userstag/", payload);
         await this.carregaTabela();
       } catch (err) {
-        alert("erro ao inserir ativo");
+        alert("erro ao inserir");
       }
     }
 

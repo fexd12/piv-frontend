@@ -8,7 +8,6 @@ class tagDAO{
             fields: [
               'id',
               'tag',
-              'state',
               'created_at',
               'update_at',
             ],
