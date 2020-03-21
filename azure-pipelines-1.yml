@@ -16,6 +16,12 @@ steps:
 - task: UseNode@1
   inputs:
     version: '10.15.3'
+
+- script: |
+    cd frontend/CoPilot/
+    npm install
+    npm run build
+  displayName: 'npm install and build'
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
@@ -29,8 +35,3 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
-- script: |
-    cd frontend/CoPilot/
-    npm install
-    npm run build
-  displayName: 'npm install and build'
