@@ -38,7 +38,7 @@ export default {
   methods:{
     async carregaLista(){
       //this.users.splice(0, this.users.length)
-      let dados1 = await axios.get('http://localhost:3000/users/')
+      let dados1 = await axios.get('https://backendpiv.azurewebsites.net/users/')
       dados1.data.forEach(element => {
         this.users.push({
         value:element.id,
@@ -46,7 +46,7 @@ export default {
         })
       })
       //this.tags.splice(0, this.tags.length)
-      let dados2 = await axios.get('http://localhost:3000/tag/')
+      let dados2 = await axios.get('https://backendpiv.azurewebsites.net/tag/')
       dados2.data.forEach(element => {
         this.tags.push({
         value:element.id,

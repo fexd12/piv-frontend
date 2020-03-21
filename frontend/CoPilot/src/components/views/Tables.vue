@@ -60,7 +60,7 @@ export default {
   methods: {
     async carregaTabela () {
       this.ativos.splice(0, this.ativos.length)
-      let dados = await axios.get('http://localhost:3000/userstag')
+      let dados = await axios.get('https://backendpiv.azurewebsites.net/userstag')
       this.ativos.push(...dados.data)
     },
     beforeUsersTags() {
@@ -75,7 +75,7 @@ export default {
         acesso: this.ativoAtual.acesso
       }
       try {
-        await axios.post("http://localhost:3000/userstag/", payload);
+        await axios.post("https://backendpiv.azurewebsites.net/userstag/", payload);
         await this.carregaTabela();
       } catch (err) {
         alert("erro ao inserir");

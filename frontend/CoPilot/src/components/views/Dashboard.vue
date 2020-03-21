@@ -171,11 +171,11 @@ export default {
   },
   methods: {
     async carregaUsuarios () {
-      let dados = await axios.get('http://localhost:3000/users/all')
+      let dados = await axios.get('https://backendpiv.azurewebsites.net/users/all')
       this.usuarios.soma = dados.data
     },
     async carregaTags () {
-      let dados = await axios.get('http://localhost:3000/tag/all')
+      let dados = await axios.get('https://backendpiv.azurewebsites.net/tag/all')
       this.tags.soma = dados.data
     },
     carregaGrafico () {
