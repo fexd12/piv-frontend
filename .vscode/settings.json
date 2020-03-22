@@ -1,3 +1,5 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "appService.defaultWebAppToDeploy": "/subscriptions/5e9f8e6b-5d0d-4df9-a0de-a45c7a9ace04/resourceGroups/PI-IV/providers/Microsoft.Web/sites/frontendpiv",
+    "appService.deploySubpath": "frontend\\CoPilot\\dist"
 }
