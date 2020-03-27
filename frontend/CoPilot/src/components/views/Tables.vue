@@ -60,7 +60,10 @@ export default {
   methods: {
     async carregaTabela () {
       this.ativos.splice(0, this.ativos.length)
-      let dados = await axios.get('https://backendpiv.azurewebsites.net/userstag')
+      let dados = await axios.get('https://backendpiv.azurewebsites.net/userstag',{
+        headers:{
+        "Access-Control-Allow-Origin": "*"
+      }})
       this.ativos.push(...dados.data)
     },
     beforeUsersTags() {
@@ -84,7 +87,7 @@ export default {
 
   },
   async mounted () {
-    await this.carregaTabela()
+    await this.carregaTabela();
   }
 }
 
