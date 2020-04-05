@@ -5,7 +5,24 @@
         <h6 class="border-bottom border-gray pb-2 mb-0">Agendamento de Salas</h6>
         <div class="media text-muted pt-3">
           <div class="container">
-            <form>
+            <b-form>
+              <b-form-group id="input-group-1" label="Data da reunião:" label-for="input-1">
+                <b-form-input id="input-1" v-model="ativoAtual.data" required >
+                </b-form-input>
+              </b-form-group>
+              <b-form-group id="input-group-2" label="Data da reunião:" label-for="input-2">
+                <b-form-input id="input-2" v-model="ativoAtual.horaInicio" required >
+                </b-form-input>
+              </b-form-group>
+              <b-form-group id="input-group-3" label="Data da reunião:" label-for="input-3">
+                <b-form-input id="input-3" v-model="ativoAtual.horaFinal" required >
+                </b-form-input>
+              </b-form-group>
+
+
+
+
+
               <div class="row">
                 <div class="col">
                   <label for="inputName">Data da reunião:</label>
@@ -29,7 +46,7 @@
               <div class="form-group right">
                 <button type="submit" class="btn btn-outline-primary position-voltar">Buscar</button>
               </div>
-            </form>
+            </b-form>
           </div>
         </div>
       </div>
@@ -92,8 +109,20 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name:"Agendamento",
+  data: ()=>{
+    return{
+      ativoAtual:{
+        data:"",
+        horaInicio:"",
+        horaFinal:""
+      }
+    }
+  }
+}
 </script>
 
 <style>
+
 </style>
