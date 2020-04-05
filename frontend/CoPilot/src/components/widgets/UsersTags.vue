@@ -24,6 +24,7 @@ export default {
   data () {
     return {
       content:{
+        id:this.value.id,
         name: this.value.name,
         tag: this.value.tag,
         acesso: this.value.acesso
@@ -38,7 +39,7 @@ export default {
   methods:{
     async carregaLista(){
       //this.users.splice(0, this.users.length)
-      let dados1 = await axios.get('https://backendpiv.azurewebsites.net/users/')
+      let dados1 = await axios.get('http://localhost:3000/users/userstag')
       dados1.data.forEach(element => {
         this.users.push({
         value:element.id,
@@ -46,7 +47,7 @@ export default {
         })
       })
       //this.tags.splice(0, this.tags.length)
-      let dados2 = await axios.get('https://backendpiv.azurewebsites.net/tag/')
+      let dados2 = await axios.get('http://localhost:3000/tag/userstag')
       dados2.data.forEach(element => {
         this.tags.push({
         value:element.id,
@@ -56,6 +57,7 @@ export default {
     },
     handleInput(){
       let retorno = {
+        id:this.content.id,
         name: this.content.name,
         tag: this.content.tag,
         acesso: this.content.acesso
