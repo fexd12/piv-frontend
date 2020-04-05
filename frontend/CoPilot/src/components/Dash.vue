@@ -29,19 +29,18 @@
     <!-- /.content-wrapper -->
   
     <!-- Horizontal bar at bottom. Contains copy right -->
-    <dash-footer></dash-footer>
+    <!-- <dash-footer></dash-footer> -->
   </div>
 </template>
 
 <script>
-import DashFooter from './layout/DashFooter'
+// import DashFooter from './layout/DashFooter'
 import DashHeader from './layout/DashHeader'
 import Sidebar from './layout/Sidebar'
 
 export default {
   name: 'Dash',
   components: {
-    DashFooter,
     DashHeader,
     Sidebar
   },

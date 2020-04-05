@@ -7,10 +7,32 @@
         <span class="page">Dashboard</span>
       </a>
     </router-link>
-    <router-link tag="li" class="pageLink" to="/tables">
+
+    <router-link tag="li" class="pageLink" to="/usuario">
       <a>
         <i class="fa fa-table"></i>
-        <span class="page">Tables</span>
+        <span class="page">Usuario</span>
+      </a>
+    </router-link>
+
+    <router-link tag="li" class="pageLink" to="/tags">
+      <a>
+        <i class="fa fa-table"></i>
+        <span class="page">Tags</span>
+      </a>
+    </router-link>
+    
+    <router-link tag="li" class="pageLink" to="/salas">
+      <a>
+        <i class="fa fa-table"></i>
+        <span class="page">Salas</span>
+      </a>
+    </router-link>
+
+    <router-link tag="li" class="pageLink" to="/agendamento">
+      <a>
+        <i class="fa fa-table"></i>
+        <span class="page">Agendamento</span>
       </a>
     </router-link>
 
