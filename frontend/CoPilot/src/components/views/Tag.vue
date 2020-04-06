@@ -56,9 +56,6 @@ export default {
       ativos: [],
       fields: [
         {
-          key:"id"
-        },
-        {
           key: "name",
           label: "nome"
         },

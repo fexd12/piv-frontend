@@ -5,48 +5,60 @@
         <h6 class="border-bottom border-gray pb-2 mb-0">Agendamento de Salas</h6>
         <div class="media text-muted pt-3">
           <div class="container">
-            <b-form>
-              <b-form-group id="input-group-1" label="Data da reunião:" label-for="input-1">
-                <b-form-input id="input-1" v-model="ativoAtual.data" required >
-                </b-form-input>
+            
+            <b-form class="row">
+              <b-form-group
+                id="input-group-1"
+                label="Data da reunião:"
+                label-for="input-1"
+                class="col"
+              >
+                <Datetime
+                  v-model="ativoAtual.data"
+                  type="date"
+                  format="dd/MM/yyyy"
+                  value-zone="America/Sao_Paulo"
+                  placeholder="Selecione a data"
+                  :week-start="7"
+                ></Datetime>
               </b-form-group>
-              <b-form-group id="input-group-2" label="Data da reunião:" label-for="input-2">
-                <b-form-input id="input-2" v-model="ativoAtual.horaInicio" required >
-                </b-form-input>
+
+              <b-form-group
+                id="input-group-2"
+                label="Horário de início:"
+                label-for="input-2"
+                class="col"
+              >
+                <Datetime
+                  v-model="ativoAtual.horaInicio"
+                  type="time"
+                  format="hh:mm"
+                  value-zone="America/Sao_Paulo"
+                  placeholder="Selecione o horario de inicio"
+                ></Datetime>
               </b-form-group>
-              <b-form-group id="input-group-3" label="Data da reunião:" label-for="input-3">
-                <b-form-input id="input-3" v-model="ativoAtual.horaFinal" required >
-                </b-form-input>
+
+              <b-form-group
+                id="input-group-3"
+                label="Horário de término:"
+                label-for="input-3"
+                class="col"
+              >
+                <Datetime
+                  v-model="ativoAtual.horaFinal"
+                  type="time"
+                  format="hh:mm"
+                  value-zone="America/Sao_Paulo"
+                  placeholder="Selecione o horario de termino"
+                ></Datetime>
               </b-form-group>
-
-
-
-
-
-              <div class="row">
-                <div class="col">
-                  <label for="inputName">Data da reunião:</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="dataAgendamento"
-                    placeholder="dd/MM/yyyy"
-                  />
-                </div>
-                <div class="col">
-                  <label for="inputName">Horário de início:</label>
-                  <input type="text" name="hora_inicio" class="form-control" placeholder="00:00" />
-                </div>
-                <div class="col">
-                  <label for="inputName">Horário de término:</label>
-                  <input type="text" name="hora_fim" class="form-control" placeholder="00:00" />
-                  <br />
-                </div>
-              </div>
-              <div class="form-group right">
-                <button type="submit" class="btn btn-outline-primary position-voltar">Buscar</button>
-              </div>
             </b-form>
+
+            <div class="form-group center">
+              <b-button type="submit" class="btn btn-primary" v-on:click="carregaTabela">
+                <span>Buscar</span>
+              </b-button>
+            </div>
           </div>
         </div>
       </div>
@@ -57,51 +69,38 @@
         <h6 class="border-bottom border-gray pb-2 mb-0">Salas Disponíveis</h6>
         <div class="media text-muted pt-3">
           <div class="container">
-            <!-- No data message -->
-            <p class="no-data text-center">Sem salas cadastradas!</p>
-
-            <table data-table class="table-sm">
-              <thead class="table-head">
-                <tr>
-                  <th scope="col">ID</th>
-                  <th scope="col">Nome</th>
-                  <th scope="col">Quantidade de cadeiras</th>
-                  <th scope="col">Ação</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row"></th>
-                  <td></td>
-                  <td class="td"></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td class="text-left edit-block">
-                    <div class="form-check">
-                      <input class type="checkbox" />
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            <div>
-              <br />
-              <label for="inputName">Colaborador:</label>
-              <select class="form-control" name="colaborador_id">
-                <option>Selecione...</option>
-                <option>
-                  <!-- {{colaborador.nome}} -->
-                </option>
-              </select>
-              <br />
-              <div class="form-group right">
-                <!-- <button type="button" class="btn btn-success position">Salvar</button> -->
-                <button type="submit" class="btn btn-success position-voltar">Salvar</button>
-              </div>
-            </div>
+            <b-table
+              hover
+              fixed
+              responsive="true"
+              head-variant="light"
+              :items="ativos"
+              :fields="fields"
+              @row-clicked="(item,index,event)=>beforeSalvar(item)"
+            ></b-table>
           </div>
+        </div>
+      </div>
+    </main>
+
+    <main role="main" class="container">
+      <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <h6 class="border-bottom border-gray pb-2 mb-0">Usuarios</h6>
+        <div class="media text-muted pt-3">
+          <b-form class="row">
+            <b-form-group id="input-group-4" label="Usuario:" label-for="input-4" class="col">
+              <b-form-select
+                class="mb-3 form-control"
+                v-model="ativoAtual.name"
+                id="input-4"
+                :options="users"
+                required
+              ></b-form-select>
+            </b-form-group>
+          </b-form>
+        </div>
+        <div class="form-group right">
+          <b-button type="submit" class="btn btn-primary" v-on:click="salvar">Salvar</b-button>
         </div>
       </div>
     </main>
@@ -109,20 +108,79 @@
 </template>
 
 <script>
+import axios from "axios";
+import {Datetime} from 'vue-datetime';
+import 'vue-datetime/dist/vue-datetime.css'
+
 export default {
-  name:"Agendamento",
-  data: ()=>{
-    return{
-      ativoAtual:{
-        data:"",
-        horaInicio:"",
-        horaFinal:""
+  name: "Agendamento",
+  components: {
+    Datetime
+  },
+  data: () => {
+    return {
+      ativoAtual: {
+        data: "",
+        horaInicio: "",
+        horaFinal: "",
+        name: "",
+        sala: ""
+      },
+      ativos: [],
+      fields: [
+        {
+          key: "nome",
+          label: "Nome da Sala"
+        },
+        {
+          key: "quantidade",
+          label: "Quantidade de Cadeiras"
+        }
+      ],
+      users: [{ value: null, text: "Selecione um usuario" }]
+    };
+  },
+  methods: {
+    async carregaTabela() {
+      this.ativos.splice(0, this.ativos.length);
+      let dados = await axios.get("http://localhost:3000/salas/status/", {});
+      this.ativos.push(...dados.data);
+    },
+    async carregaUsuarios() {
+      // this.users.splice(0, this.users.length);
+      let dados = await axios.get("http://localhost:3000/userstag/", {});
+      dados.data.forEach(element => {
+        this.users.push({
+          value: element.id,
+          text: element.name
+        });
+      });
+    },
+    async salvar() {
+      // console.log(x)
+      let payload = {
+        data: this.ativoAtual.data,
+        horaInicio: this.ativoAtual.horaInicio,
+        horaFinal: this.ativoAtual.horaFinal,
+        name: this.ativoAtual.name,
+        sala: this.ativoAtual.sala
+      };
+      try {
+        await axios.post("http://localhost:3000/agendamento/", payload);
+        await this.carregaTabela();
+      } catch (err) {
+        alert("erro ao inserir");
       }
+    },
+    beforeSalvar(x) {
+      this.ativoAtual.sala = x.id;
     }
+  },
+  async mounted() {
+    await this.carregaUsuarios();
   }
-}
+};
 </script>
 
 <style>
-
 </style>
