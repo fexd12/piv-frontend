@@ -16,7 +16,7 @@
                 <Datetime
                   v-model="ativoAtual.data"
                   type="date"
-                  format="dd/MM/yyyy"
+                  format="dd-MM-yyyy"
                   value-zone="America/Sao_Paulo"
                   placeholder="Selecione a data"
                   :week-start="7"
@@ -32,7 +32,7 @@
                 <Datetime
                   v-model="ativoAtual.horaInicio"
                   type="time"
-                  format="hh:mm"
+                  format="dd-MM-yyyy HH:mm"
                   value-zone="America/Sao_Paulo"
                   placeholder="Selecione o horario de inicio"
                 ></Datetime>
@@ -47,7 +47,7 @@
                 <Datetime
                   v-model="ativoAtual.horaFinal"
                   type="time"
-                  format="hh:mm"
+                  format="dd-MM-yyyy HH:mm"
                   value-zone="America/Sao_Paulo"
                   placeholder="Selecione o horario de termino"
                 ></Datetime>
@@ -110,7 +110,8 @@
 <script>
 import axios from "axios";
 import {Datetime} from 'vue-datetime';
-import 'vue-datetime/dist/vue-datetime.css'
+
+import 'vue-datetime/dist/vue-datetime.css';
 
 export default {
   name: "Agendamento",
