@@ -42,7 +42,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import SalasForm from "../widgets/FormSalas";
 export default {
   components: {
@@ -71,7 +70,7 @@ export default {
   methods: {
     async carregaTabela() {
       this.ativos.splice(0, this.ativos.length);
-      let dados = await axios.get("http://localhost:3000/salas/", {});
+      let dados = await this.$http.get(`${this.$baseUrl}/salas/`, {});
       this.ativos.push(...dados.data);
     },
     beforeSala() {
@@ -84,7 +83,7 @@ export default {
         quantidade: this.ativoAtual.quantidade
       };
       try {
-        await axios.post("http://localhost:3000/salas/", payload);
+        await this.$http.post(`${this.$baseUrl}/salas/`, payload);
         await this.carregaTabela();
       } catch (err) {
         alert("erro ao inserir");

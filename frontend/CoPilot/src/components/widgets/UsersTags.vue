@@ -39,7 +39,7 @@ export default {
   methods:{
     async carregaLista(){
       //this.users.splice(0, this.users.length)
-      let dados1 = await axios.get('http://localhost:3000/users/userstag')
+      let dados1 = await this.$http.get(`${this.$baseUrl}/users/userstag`)
       dados1.data.forEach(element => {
         this.users.push({
         value:element.id,
@@ -47,7 +47,7 @@ export default {
         })
       })
       //this.tags.splice(0, this.tags.length)
-      let dados2 = await axios.get('http://localhost:3000/tag/userstag')
+      let dados2 = await this.$http.get(`${this.$baseUrl}/tag/userstag`)
       dados2.data.forEach(element => {
         this.tags.push({
         value:element.id,

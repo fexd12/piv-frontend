@@ -94,14 +94,10 @@ export default {
     };
   },
   methods: {
-    async carregaTabela() {
-      this.ativos.splice(0, this.ativos.length);
-      let dados = await axios.get("http://localhost:3000/users", {});
-      this.ativos.push(...dados.data);
-    },
+
     async excluirUser(ativo) {
       try {
-        await axios.delete(`http://localhost:3000/users/${ativo.id}`);
+        await this.$http.delete(`${this.$baseUrl}/users/${ativo.id}`);
         await this.carregaTabela();
       } catch (err) {
         alert("erro ao excluir ativo");
@@ -122,8 +118,8 @@ export default {
         email: this.ativoAtual.email
       };
       try {
-        await axios.put(
-          `http://localhost:3000/users/${this.ativoAtual.id}`,
+        await this.$http.put(
+          `${this.$baseUrl}/users/${this.ativoAtual.id}`,
           payload
         );
         await this.carregaTabela();
@@ -131,17 +127,24 @@ export default {
         alert("erro ao atualizar ativo");
       }
     },
+    async carregaTabela() {
+      this.ativos.splice(0, this.ativos.length);
+      let dados = await this.$http.get(`${this.$baseUrl}/users`, {});
+      this.ativos.push(...dados.data);
+    },
     beforeUsers() {
+      this.ativoAtual.id = "";
       this.ativoAtual.name = "";
       this.ativoAtual.email = "";
     },
     async saveUsers() {
       let payload = {
+        id:this.ativoAtual.id,
         name: this.ativoAtual.name,
         email: this.ativoAtual.email
       };
       try {
-        await axios.post("http://localhost:3000/users/", payload);
+        await this.$http.post(`${this.$baseUrl}/users/`, payload);
         await this.carregaTabela();
       } catch (err) {
         alert("erro ao inserir");

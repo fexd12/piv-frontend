@@ -9,7 +9,7 @@
             <b-form class="row">
               <b-form-group
                 id="input-group-1"
-                label="Data da reunião:"
+                label="Data do Agendamento:"
                 label-for="input-1"
                 class="col"
               >
@@ -32,7 +32,7 @@
                 <Datetime
                   v-model="ativoAtual.horaInicio"
                   type="time"
-                  format="dd-MM-yyyy HH:mm"
+                  format="HH:mm"
                   value-zone="America/Sao_Paulo"
                   placeholder="Selecione o horario de inicio"
                 ></Datetime>
@@ -47,7 +47,7 @@
                 <Datetime
                   v-model="ativoAtual.horaFinal"
                   type="time"
-                  format="dd-MM-yyyy HH:mm"
+                  format=" HH:mm"
                   value-zone="America/Sao_Paulo"
                   placeholder="Selecione o horario de termino"
                 ></Datetime>
@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import moment from 'moment'
 import {Datetime} from 'vue-datetime';
 
 import 'vue-datetime/dist/vue-datetime.css';
@@ -144,12 +144,25 @@ export default {
   methods: {
     async carregaTabela() {
       this.ativos.splice(0, this.ativos.length);
-      let dados = await axios.get("http://localhost:3000/salas/status/", {});
-      this.ativos.push(...dados.data);
+      this.ativoAtual.horaInicio = moment(this.ativoAtual.horaInicio).format('HH:mm');
+      this.ativoAtual.horaFinal = moment(this.ativoAtual.horaFinal).format('HH:mm');
+      this.ativoAtual.data = moment(this.ativoAtual.data).format('DD-MM-YYYY');
+      let payload = {
+        hora_inicio :this.ativoAtual.horaInicio,
+        hora_final :this.ativoAtual.horaFinal,
+        data:this.ativoAtual.data
+      };
+      try {
+        let dados = await this.$http.post(`${this.$baseUrl}/salas/status/`,payload);
+        this.ativos.push(...dados.data);
+      } catch (error) {
+        alert('erro ao inserir')
+      }
+      
     },
     async carregaUsuarios() {
       // this.users.splice(0, this.users.length);
-      let dados = await axios.get("http://localhost:3000/userstag/", {});
+      let dados = await this.$http.get(`${this.$baseUrl}/userstag/`, {});
       dados.data.forEach(element => {
         this.users.push({
           value: element.id,
@@ -167,7 +180,7 @@ export default {
         sala: this.ativoAtual.sala
       };
       try {
-        await axios.post("http://localhost:3000/agendamento/", payload);
+        await this.$http.post(`${this.$baseUrl}/agendamento/`, payload);
         await this.carregaTabela();
       } catch (err) {
         alert("erro ao inserir");

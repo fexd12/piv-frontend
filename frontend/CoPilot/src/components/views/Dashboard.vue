@@ -15,28 +15,28 @@
       </div>-->
 
       <!-- Info boxes -->
-      <div class="col-lg-3 col-md-6 col-12">
+      <div class="col-lg-3">
         <template>
           <div class="info-box">
             <span :class="['info-box-icon', 'bg-yellow']">
               <i :class="['ion', 'ion-ios-people-outline']"></i>
             </span>
             <div class="info-box-content">
-              <span :class="'info-box-text'">{{'Usuarios Cadastrados'}}</span>
+              <span :class="'text'">{{'Usuarios Cadastrados'}}</span>
               <span :class="'info-box-number'">{{usuarios.soma}}</span>
             </div>
           </div>
         </template>
       </div>
 
-      <div class="col-lg-3 col-md-6 col-12">
+      <div class="col-lg-3">
         <template>
           <div class="info-box">
             <span :class="['info-box-icon', 'bg-yellow']">
               <i :class="['ion', 'ion-ios-people-outline']"></i>
             </span>
             <div class="info-box-content">
-              <span :class="'info-box-text'">{{'Tags cadastradas'}}</span>
+              <span :class="'text'">{{'Tags cadastradas'}}</span>
               <span :class="'info-box-number'">{{tags.soma}}</span>
             </div>
           </div>
@@ -76,23 +76,34 @@
           <div class="box-header with-border">
             <h3 class="box-title"></h3>
             <div class="box-body">
-              <div class="col-lg-6 col-12">
-                <p class="text-center">
+              <div class="row">
+                <!-- <p class="text-center">
                   <strong>Web Traffic Overview</strong>
                 </p>
-                <canvas id="trafficBar"></canvas>
+                <canvas id="trafficBar"></canvas> -->
+                <template v-for="list in salas.length">
+                  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" v-bind:key="list">
+                    <b-card-group>
+                      <b-card :bg-variant="salas[list-1].status === 's' ? 'success':'danger'" text-variant="white" header="sala" class="text-center">
+                        <b-card-text v-text="salas[list-1].nome">
+                        </b-card-text>
+                      </b-card>
+                    </b-card-group>
+                  </div>
+                </template>
               </div>
               <!-- <hr class="d-block d-sm-none-block"> -->
-              <div class="col-lg-6 col-12">
+              <!-- <div class="col-lg-6 col-12">
                 <p class="text-center">
                   <strong>Language Overview</strong>
                 </p>
                 <canvas id="languagePie"></canvas>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
       </div>
+
       <!-- /.row -->
 
       <!-- Main row -->
@@ -145,7 +156,6 @@ import Chart from "chart.js";
 import Alert from "../widgets/Alert";
 import InfoBox from "../widgets/InfoBox";
 import ProcessInfoBox from "../widgets/ProcessInfoBox";
-import axios from "axios";
 
 export default {
   name: "Dashboard",
@@ -156,116 +166,38 @@ export default {
   },
   data: () => {
     return {
-      generateRandomNumbers(numbers, max, min) {
-        var a = [];
-        for (var i = 0; i < numbers; i++) {
-          a.push(Math.floor(Math.random() * (max - min + 1)) + max);
-        }
-        return a;
-      },
       usuarios: {
         soma: ""
       },
       tags: {
         soma: ""
-      }
+      },
+      salas:[]
     };
   },
   methods: {
     async carregaUsuarios() {
-      let dados = await axios.get("http://localhost:3000/users/all/", {});
+      let dados = await this.$http.get(`${this.$baseUrl}/users/all/`, {});
       this.usuarios.soma = dados.data;
     },
     async carregaTags() {
-      let dados = await axios.get("http://localhost:3000/tag/all/", {});
+      let dados = await this.$http.get(`${this.$baseUrl}/tag/all/`, {});
       this.tags.soma = dados.data;
     },
-    carregaGrafico() {
-      var ctx = document.getElementById("trafficBar").getContext("2d");
-      var config = {
-        type: "line",
-        data: {
-          labels: [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-            "September",
-            "October",
-            "November",
-            "December"
-          ],
-          datasets: [
-            {
-              label: "CoPilot",
-              fill: false,
-              borderColor: "#284184",
-              pointBackgroundColor: "#284184",
-              backgroundColor: "rgba(0, 0, 0, 0)",
-              data: this.coPilotNumbers
-            },
-            {
-              label: "Personal Site",
-              borderColor: "#4BC0C0",
-              pointBackgroundColor: "#4BC0C0",
-              backgroundColor: "rgba(0, 0, 0, 0)",
-              data: this.personalNumbers
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: !this.isMobile,
-          legend: {
-            position: "bottom",
-            display: true
-          },
-          tooltips: {
-            mode: "label",
-            xPadding: 10,
-            yPadding: 10,
-            bodySpacing: 10
-          }
-        }
-      };
-
-      new Chart(ctx, config); // eslint-disable-line no-new
-
-      // var pieChartCanvas = document.getElementById('languagePie').getContext('2d')
-      // var pieConfig = {
-      //   type: 'pie',
-      //   data: {
-      //     labels: ['HTML', 'JavaScript', 'CSS'],
-      //     datasets: [{
-      //       data: [56.6, 37.7, 4.1],
-      //       backgroundColor: ['#00a65a', '#f39c12', '#00c0ef'],
-      //       hoverBackgroundColor: ['#00a65a', '#f39c12', '#00c0ef']
-      //     }]
-      //   },
-      //   options: {
-      //     responsive: true,
-      //     maintainAspectRatio: !this.isMobile,
-      //     legend: {
-      //       position: 'bottom',
-      //       display: true
-      //     }
-      //   }
-      // }
-
-      // new Chart(pieChartCanvas, pieConfig) // eslint-disable-line no-new
+    async carregaSala(){
+      this.salas.splice(0, this.salas.length);
+      let dados = await this.$http.get(`${this.$baseUrl}/salas`, {});
+      this.salas.push(...dados.data);
+      // console.log(this.salas);
     }
   },
   computed: {
-    coPilotNumbers() {
-      return this.generateRandomNumbers(12, 1000000, 10000);
-    },
-    personalNumbers() {
-      return this.generateRandomNumbers(12, 1000000, 10000);
-    },
+    // coPilotNumbers() {
+    //   return this.generateRandomNumbers(12, 1000000, 10000);
+    // },
+    // personalNumbers() {
+    //   return this.generateRandomNumbers(12, 1000000, 10000);
+    // },
     isMobile() {
       return window.innerWidth <= 800 && window.innerHeight <= 600;
     }
@@ -273,7 +205,7 @@ export default {
   async mounted() {
     await this.carregaUsuarios();
     await this.carregaTags();
-    this.carregaGrafico();
+    await this.carregaSala();
   }
 };
 </script>

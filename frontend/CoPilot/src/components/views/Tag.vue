@@ -39,10 +39,9 @@
 
 <script>
 import UsersTags from "../widgets/UsersTags";
-import axios from "axios";
 
 export default {
-  name: "Table",
+  name: "Tags",
   components: {
     UsersTags
   },
@@ -73,8 +72,7 @@ export default {
   methods: {
     async carregaTabela() {
       this.ativos.splice(0, this.ativos.length);
-      let dados = await axios.get("http://localhost:3000/userstag", {});
-      console.log(dados);
+      let dados = await this.$http.get(`${this.$baseUrl}/userstag`, {});
       this.ativos.push(...dados.data);
     },
     beforeUsersTags() {
@@ -89,8 +87,12 @@ export default {
         acesso: this.ativoAtual.acesso
       };
       try {
-        await axios.post("http://localhost:3000/userstag/", payload);
-        await this.carregaTabela();
+        if(payload.acesso !=null){
+          await this.$http.post(`${this.$baseUrl}/userstag/`, payload);
+          await this.carregaTabela();
+        }else{
+          alert("inserir um tipo de acesso valido");
+        }
       } catch (err) {
         alert("erro ao inserir");
       }

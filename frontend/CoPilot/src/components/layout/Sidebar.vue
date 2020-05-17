@@ -52,12 +52,6 @@ export default {
   name: 'Sidebar',
   props: ['user'],
   components: { SidebarMenu },
-  // mounted: function() {
-  //   window
-  //     .jQuery('[data-toggle="hideseek"]')
-  //     .off()
-  //     .hideseek()
-  // }
 }
 </script>
 <style scope="local">

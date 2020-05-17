@@ -6,14 +6,19 @@ import VueRouter from 'vue-router'
 import BootstrapVue from 'bootstrap-vue'
 import App from './components/App.vue'
 import routes from './router'
+import VueAxios from 'vue-axios'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import axios from 'axios'
 
 Vue.config.productionTip = false
 
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
+Vue.use(VueAxios,axios)
+
+Vue.prototype.$baseUrl = "http://104.197.195.254:3000"
 
 /* eslint-disable no-new */
 // eslint-disable-next-line no-new
@@ -28,6 +33,6 @@ var router = new VueRouter({
 
 new Vue({
   el: '#root',
-  router: router,
+  router,
   render: h => h(App)
-})
+}).$mount('#app')
