@@ -18,7 +18,9 @@ Vue.use(VueRouter)
 Vue.use(BootstrapVue)
 Vue.use(VueAxios,axios)
 
-Vue.prototype.$baseUrl = "http://35.247.255.32:3000"
+// Vue.prototype.$baseUrl = "http://35.247.255.32:3000"
+Vue.prototype.$baseUrl = "http://localhost:3000"
+
 
 /* eslint-disable no-new */
 // eslint-disable-next-line no-new

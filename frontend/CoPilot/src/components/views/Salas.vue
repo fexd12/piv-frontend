@@ -23,7 +23,6 @@
           <div class="container">
             <!-- No data message -->
             <!-- Sala list -->
-
             <div class="info-box-text">
               <b-table
                 class="table table-bordered dataTable"
@@ -90,7 +89,7 @@ export default {
       }
     }
   },
-  async mounted(){
+  async mounted() {
     await this.carregaTabela();
   }
 };

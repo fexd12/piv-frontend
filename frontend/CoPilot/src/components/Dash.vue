@@ -1,12 +1,11 @@
 <template>
   <div :class="['wrapper', classes]">
-
     <!-- Horizontal bar at top. Contains messages, notifications, tasks and user menu -->
     <dash-header :user="user"></dash-header>
-    
+
     <!-- Left side column. contains the logo and sidebar -->
     <sidebar :user="user" />
-  
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
@@ -18,7 +17,8 @@
         <ol class="breadcrumb">
           <li>
             <a href="javascript:;">
-              <i class="fa fa-home"></i>Home</a>
+              <i class="fa fa-home"></i>Home
+            </a>
           </li>
           <li class="active">{{$route.name.toUpperCase()}}</li>
         </ol>
@@ -27,7 +27,7 @@
       <router-view></router-view>
     </div>
     <!-- /.content-wrapper -->
-  
+
     <!-- Horizontal bar at bottom. Contains copy right -->
     <!-- <dash-footer></dash-footer> -->
   </div>
@@ -35,34 +35,34 @@
 
 <script>
 // import DashFooter from './layout/DashFooter'
-import DashHeader from './layout/DashHeader'
-import Sidebar from './layout/Sidebar'
+import DashHeader from "./layout/DashHeader";
+import Sidebar from "./layout/Sidebar";
 
 export default {
-  name: 'Dash',
+  name: "Dash",
   components: {
     DashHeader,
     Sidebar
   },
-  data: function () {
+  data: function() {
     return {
       // section: 'Dash',
       classes: {
-        fixed_layout: '',
-        hide_logo: ''
+        fixed_layout: "",
+        hide_logo: ""
       }
-    }
+    };
   },
   computed: {
-    user () {
+    user() {
       return {
-        displayName: '',
-        avatar: '',
-        roles: ''
-      }
+        displayName: "",
+        avatar: "",
+        roles: ""
+      };
     }
   }
-}
+};
 </script>
 
 <style>

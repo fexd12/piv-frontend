@@ -48,7 +48,6 @@
                 <i class="fa fa-pencil"></i>
               </b-button>
             </template>
-            
           </b-table>
         </div>
       </div>
@@ -94,7 +93,6 @@ export default {
     };
   },
   methods: {
-
     async excluirUser(ativo) {
       try {
         await this.$http.delete(`${this.$baseUrl}/users/${ativo.id}`);
@@ -139,7 +137,7 @@ export default {
     },
     async saveUsers() {
       let payload = {
-        id:this.ativoAtual.id,
+        id: this.ativoAtual.id,
         name: this.ativoAtual.name,
         email: this.ativoAtual.email
       };
@@ -148,7 +146,6 @@ export default {
         await this.carregaTabela();
       } catch (err) {
         alert("erro ao inserir");
-        
       }
     }
   },

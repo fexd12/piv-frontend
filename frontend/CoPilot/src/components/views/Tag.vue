@@ -2,13 +2,12 @@
   <div>
     <div>
       <b-button class="btn btn-primary" v-b-modal.criaUserTag>
-          <span>Adicionar</span>
+        <span>Adicionar</span>
       </b-button>
     </div>
 
     <main role="main" class="container">
       <div class="my-3 p-3 bg-white rounded shadow-sm">
-        
         <b-modal
           id="criaUserTag"
           title="Vincular tag com usuario"
@@ -28,9 +27,7 @@
             head-variant="light"
             :items="ativos"
             :fields="fields"
-          >
-          </b-table>
-
+          ></b-table>
         </div>
       </div>
     </main>
@@ -87,10 +84,10 @@ export default {
         acesso: this.ativoAtual.acesso
       };
       try {
-        if(payload.acesso !=null){
+        if (payload.acesso != null) {
           await this.$http.post(`${this.$baseUrl}/userstag/`, payload);
           await this.carregaTabela();
-        }else{
+        } else {
           alert("inserir um tipo de acesso valido");
         }
       } catch (err) {
@@ -105,33 +102,4 @@ export default {
 </script>
 
 <style>
-/* Using the bootstrap style, but overriding the font to not draw in
-   the Glyphicons Halflings font as an additional requirement for sorting icons.
-
-   An alternative to the solution active below is to use the jquery style
-   which uses images, but the color on the images does not match adminlte.
-
-@import url('/static/js/plugins/datatables/jquery.dataTables.min.css');
-*/
-
-/* 
-@import url('/static/js/plugins/datatables/dataTables.bootstrap.css');
-
-table.dataTable thead .sorting:after,
-table.dataTable thead .sorting_asc:after,
-table.dataTable thead .sorting_desc:after {
-  font-family: 'FontAwesome';
-}
-
-table.dataTable thead .sorting:after {
-  content: '\f0dc';
-}
-
-table.dataTable thead .sorting_asc:after {
-  content: '\f0dd';
-}
-
-table.dataTable thead .sorting_desc:after {
-  content: '\f0de';
-} */
 </style>

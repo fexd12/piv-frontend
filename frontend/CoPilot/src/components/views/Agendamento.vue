@@ -5,7 +5,6 @@
         <h6 class="border-bottom border-gray pb-2 mb-0">Agendamento de Salas</h6>
         <div class="media text-muted pt-3">
           <div class="container">
-            
             <b-form class="row">
               <b-form-group
                 id="input-group-1"
@@ -108,10 +107,10 @@
 </template>
 
 <script>
-import moment from 'moment'
-import {Datetime} from 'vue-datetime';
+import moment from "moment";
+import { Datetime } from "vue-datetime";
 
-import 'vue-datetime/dist/vue-datetime.css';
+import "vue-datetime/dist/vue-datetime.css";
 
 export default {
   name: "Agendamento",
@@ -144,21 +143,27 @@ export default {
   methods: {
     async carregaTabela() {
       this.ativos.splice(0, this.ativos.length);
-      this.ativoAtual.horaInicio = moment(this.ativoAtual.horaInicio).format('HH:mm');
-      this.ativoAtual.horaFinal = moment(this.ativoAtual.horaFinal).format('HH:mm');
-      this.ativoAtual.data = moment(this.ativoAtual.data).format('DD-MM-YYYY');
+      this.ativoAtual.horaInicio = moment(this.ativoAtual.horaInicio).format(
+        "HH:mm"
+      );
+      this.ativoAtual.horaFinal = moment(this.ativoAtual.horaFinal).format(
+        "HH:mm"
+      );
+      this.ativoAtual.data = moment(this.ativoAtual.data).format("DD-MM-YYYY");
       let payload = {
-        hora_inicio :this.ativoAtual.horaInicio,
-        hora_final :this.ativoAtual.horaFinal,
-        data:this.ativoAtual.data
+        hora_inicio: this.ativoAtual.horaInicio,
+        hora_final: this.ativoAtual.horaFinal,
+        data: this.ativoAtual.data
       };
       try {
-        let dados = await this.$http.post(`${this.$baseUrl}/salas/status/`,payload);
+        let dados = await this.$http.post(
+          `${this.$baseUrl}/salas/status/`,
+          payload
+        );
         this.ativos.push(...dados.data);
       } catch (error) {
-        alert('erro ao inserir')
+        alert("erro ao inserir");
       }
-      
     },
     async carregaUsuarios() {
       // this.users.splice(0, this.users.length);
