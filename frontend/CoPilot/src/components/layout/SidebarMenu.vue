@@ -10,14 +10,14 @@
 
     <router-link tag="li" class="pageLink" to="/usuario">
       <a>
-        <i class="fa fa-table"></i>
+        <i class="fa fa-user"></i>
         <span class="page">Usuario</span>
       </a>
     </router-link>
 
     <router-link tag="li" class="pageLink" to="/tags">
       <a>
-        <i class="fa fa-table"></i>
+   <i class="fa fa-credit-card" aria-hidden="true"></i>
         <span class="page">Tags</span>
       </a>
     </router-link>
@@ -31,7 +31,7 @@
 
     <router-link tag="li" class="pageLink" to="/agendamento">
       <a>
-        <i class="fa fa-table"></i>
+        <i class="fa fa-calendar"></i>
         <span class="page">Agendamento</span>
       </a>
     </router-link>
@@ -39,7 +39,7 @@
 </template>
 <script>
 export default {
-  name: "SidebarMenu"
+  name: "SidebarMenu",
 };
 </script>
 <style>
