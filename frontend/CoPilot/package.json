@@ -18,7 +18,7 @@
     "datatables.net": "^1.10.20",
     "datatables.net-bs": "^1.10.20",
     "hideseek": "^0.8.0",
-    "luxon": "^1.23.0",
+    "luxon": "^1.28.1",
     "moment": "^2.25.3",
     "vue": "^2.5.2",
     "vue-axios": "^2.1.5",
